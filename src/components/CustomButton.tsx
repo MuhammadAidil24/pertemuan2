@@ -1,49 +1,68 @@
 import React from 'react';
+
 import {
   TouchableOpacity,
   Text,
   StyleSheet,
 } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
+
 interface CustomButtonProps {
   title: string;
   onPress: () => void;
   variant?: 'primary' | 'secondary' | 'danger';
-  disabled?: boolean;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   title,
   onPress,
   variant = 'primary',
-  disabled = false,
 }) => {
-  const getBackgroundColor = () => {
-    if (disabled) return '#A0A0A0';
-
+  const getBackground = () => {
     switch (variant) {
       case 'secondary':
-        return '#2ecc71';
+        return '#10B981';
 
       case 'danger':
-        return '#e74c3c';
+        return '#FF2D55';
 
       default:
-        return '#3498db';
+        return '#7861FF';
+    }
+  };
+
+  const getIcon = () => {
+    switch (variant) {
+      case 'secondary':
+        return 'person-add-outline';
+
+      case 'danger':
+        return 'trash-outline';
+
+      default:
+        return 'log-in-outline';
     }
   };
 
   return (
     <TouchableOpacity
+      activeOpacity={0.9}
       onPress={onPress}
-      disabled={disabled}
       style={[
-        styles.container,
+        styles.button,
         {
-          backgroundColor: getBackgroundColor(),
+          backgroundColor: getBackground(),
         },
       ]}
     >
+      <Ionicons
+        name={getIcon() as any}
+        size={20}
+        color="#fff"
+        style={{ marginRight: 10 }}
+      />
+
       <Text style={styles.text}>
         {title}
       </Text>
@@ -52,18 +71,39 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 10,
+  button: {
+    flexDirection: 'row',
+
     alignItems: 'center',
-    marginVertical: 5,
+
+    justifyContent: 'center',
+
+    paddingVertical: 16,
+
+    borderRadius: 18,
+
+    marginTop: 14,
+
+    shadowColor: '#000',
+
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+
+    shadowOpacity: 0.08,
+
+    shadowRadius: 12,
+
+    elevation: 4,
   },
 
   text: {
     color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+
+    fontSize: 18,
+
+    fontWeight: '700',
   },
 });
 

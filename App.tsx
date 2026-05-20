@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 
 import {
   View,
-  StyleSheet,
-  Alert,
   Text,
+  StyleSheet,
+  StatusBar,
+  Alert,
 } from 'react-native';
 
 import Card from './src/components/Card';
-import CustomButton from './src/components/CustomButton';
+
 import CustomInput from './src/components/CustomInput';
+
+import CustomButton from './src/components/CustomButton';
 
 export default function App() {
   const [nama, setNama] = useState('');
-  const [password, setPassword] = useState('');
+
+  const [password, setPassword] =
+    useState('');
 
   const handleLogin = () => {
     Alert.alert(
@@ -24,20 +29,26 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        React Native Login UI
-      </Text>
+      <StatusBar
+        barStyle="light-content"
+      />
 
       <Card>
+        <Text style={styles.title}>
+          React Native Login UI
+        </Text>
+
         <CustomInput
-          label="Nama"
+          label="NAMA"
+          icon="person-outline"
           placeholder="Masukkan nama"
           value={nama}
           onChangeText={setNama}
         />
 
         <CustomInput
-          label="Password"
+          label="PASSWORD"
+          icon="lock-closed-outline"
           placeholder="Masukkan password"
           value={password}
           onChangeText={setPassword}
@@ -72,16 +83,23 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eef2f5',
+
+    backgroundColor: '#0F2B5B',
+
     justifyContent: 'center',
-    padding: 20,
+
+    padding: 24,
   },
 
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontSize: 32,
+
+    fontWeight: '700',
+
+    color: '#1F2A44',
+
     textAlign: 'center',
-    color: '#222',
+
+    marginBottom: 24,
   },
 });
